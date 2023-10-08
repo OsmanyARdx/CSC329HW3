@@ -10,6 +10,18 @@ public class PQHeap implements PriorityQueue{
         size = 0;
     }
 
+    public PQHeap(PQHeap toBeCopied){
+        this.size = toBeCopied.size;
+        this.arrayAccounts = new Account[toBeCopied.arrayAccounts.length];
+        for(int i = 0; i < toBeCopied.size; i++){
+            this.arrayAccounts[i] = toBeCopied.arrayAccounts[i].deepCopy();
+        }
+    }
+
+    public PQHeap deepCopy(){
+        return new PQHeap(this);
+    }
+
     /**
      * Method to add to the PriorityQueue
      *
@@ -55,7 +67,7 @@ public class PQHeap implements PriorityQueue{
 
     public void heapifyUp(int index){
         if(index != 0) {
-            if (arrayAccounts[index].getBalance() < arrayAccounts[getParentIndex(index)].getBalance()) {
+            if (arrayAccounts[index].getBalance() > arrayAccounts[getParentIndex(index)].getBalance()) {
                 swap(getParentIndex(index), index);
                 if (index != 0) {
                     index = getParentIndex(index);
@@ -75,7 +87,10 @@ public class PQHeap implements PriorityQueue{
      */
     @Override
     public Account getMax() {
-        return null;
+        Account temp = arrayAccounts[0];
+        swap(size, 0);
+        heapifyUp();
+        return temp;
     }
 
     /**
