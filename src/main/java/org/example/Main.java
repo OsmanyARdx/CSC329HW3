@@ -15,7 +15,9 @@ public class Main {
         for(int i = 0; i < a.length; i++){
             accountPQHeap.add(a[i]);
         }
-            a = accountPQHeap.arrayAccounts;
+        for(int i = 0; i < a.length; i++) {
+            a[i] = accountPQHeap.getMax();
+        }
     }
 
     /**
@@ -40,13 +42,10 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        //heapSort(accounts);
+        heapSort(accounts);
 
-//        for(int i=0; i<accounts.length;i++){
-//            System.out.println(accounts[i].getBalance() + " - " + accounts[i].getName());
-//        }
-        for(int i=0; i< heap.size;i++){
-            System.out.println(heap.arrayAccounts[i].getBalance() + " - " + heap.arrayAccounts[i].getName());
+        for(int i=0; i<accounts.length;i++){
+            System.out.println(accounts[i].getBalance() + " - " + accounts[i].getName());
         }
     }
 }

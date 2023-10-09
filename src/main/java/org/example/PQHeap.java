@@ -2,7 +2,7 @@ package org.example;
 
 public class PQHeap implements PriorityQueue{
 
-    public Account[] arrayAccounts;
+    private Account[] arrayAccounts;
     int size;
 
     public PQHeap(){
@@ -81,17 +81,17 @@ public class PQHeap implements PriorityQueue{
     public void heapifyDown(int index){
         int leftChild = getLeftChildIndex(index);
         int rightChild = getRightChildIndex(index);
-        int tempSmall = index;
+        int tempLargest = index;
 
-        if(leftChild < size && arrayAccounts[leftChild].getBalance() > arrayAccounts[tempSmall].getBalance()){
-            tempSmall = leftChild;
+        if(leftChild < size && arrayAccounts[leftChild].getBalance() > arrayAccounts[tempLargest].getBalance()){
+            tempLargest = leftChild;
         }
-        if(rightChild < size && arrayAccounts[rightChild].getBalance() > arrayAccounts[tempSmall].getBalance()){
-            tempSmall = rightChild;
+        if(rightChild < size && arrayAccounts[rightChild].getBalance() > arrayAccounts[tempLargest].getBalance()){
+            tempLargest = rightChild;
         }
-        if(tempSmall != index){
-            swap(index, tempSmall);
-            heapifyDown(tempSmall);
+        if(tempLargest != index){
+            swap(index, tempLargest);
+            heapifyDown(tempLargest);
         }
     }
 
@@ -103,9 +103,11 @@ public class PQHeap implements PriorityQueue{
     @Override
     public Account getMax() {
         Account temp = arrayAccounts[0];
-        swap(size, 0);
-        heapifyDown(0);
-        size--;
+        if(size != 0){
+            size--;
+            swap(size, 0);
+            heapifyDown(0);
+        }
         return temp;
     }
 
