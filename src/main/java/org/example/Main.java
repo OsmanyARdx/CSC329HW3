@@ -10,6 +10,12 @@ import java.util.Scanner;
  * Runs main program
  */
 public class Main {
+
+    /**
+     * Method to sort accounts using heap in terms of account balance
+     * High to low
+     * @param a takes in a array of Account objects
+     */
     public static void heapSort(Account[] a){
         PQHeap accountPQHeap= new PQHeap();
         for(int i = 0; i < a.length; i++){
@@ -22,7 +28,7 @@ public class Main {
 
     /**
      * Runnable program
-     * @param args
+     * @param args Strings
      */
     public static void main(String[] args) {
         Account[] accounts = new Account[1000];
@@ -45,7 +51,7 @@ public class Main {
         heapSort(accounts);
 
         for(int i=0; i<accounts.length;i++){
-            System.out.println(accounts[i].getBalance() + " - " + accounts[i].getName());
+            System.out.println("[" + i + "]" +accounts[i].getBalance() + " - " + accounts[i].getName());
         }
     }
 }
